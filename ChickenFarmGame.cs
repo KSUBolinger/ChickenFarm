@@ -10,6 +10,7 @@ namespace ChickenFarm
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private ChickenSprite chicken;
 
         public ChickenFarmGame()
         {
