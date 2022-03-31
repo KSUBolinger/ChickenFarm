@@ -1,0 +1,19 @@
+Content/Chicken.png - created by AntumDeluge on OpenGameArt.org (https://opengameart.org/content/lpc-chicken-rework), released under public domain
+
+Content/egg_whole_white.png - created by ARoachIFoundOnMyPillow on OpenGameArt.org (https://opengameart.org/content/16x16-food), released under public domain
+
+Content/Plains.png - created by Theoden on OpenGameArt.org (https://opengameart.org/content/grassy-plains-background), released under public domain
+
+Content/Snake.png - created by Hiross on OpenGameArt.org (https://opengameart.org/content/snake-2d-remix-with-dead-animation), released under public domain
+
+Content/bangers.spritefont - Bangers font created by Vernon Adams, released on Google Fonts (https://fonts.google.com/specimen/Bangers) under the Open Font License
+
+Content/EggPickup.wav - Created by Easton Bolinger with BXFR, released under public domain
+
+Content/Collision.wav - Created by Easton Bolinger with BXFR, released under public domain
+
+Content/BackgroundCountry.mp3 - created by Jason Shaw (https://freemusicarchive.org/music/Jason_Shaw/Audionautix_Acoustic/MOUNTAIN_SUN_____________________2-33) released under CC-BY-3.0-US license
+
+Content/BackgroundBlueGrass.mp3 - created by Shake That Little Foot (https://freemusicarchive.org/music/Shake_That_Little_Foot/Shake_That_Little_Foot/West_Fork_Gals_vbrmp3) released under CC-BY-NA-SA-3.0 license
+
+Content/0006.png - created by rubberduck on OpenGameArt.org (https://opengameart.org/content/sparkling-fireball-effect), released under public domain
