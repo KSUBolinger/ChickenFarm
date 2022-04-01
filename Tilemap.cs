@@ -61,9 +61,9 @@ namespace ChickenFarm
 
             for(int y = 0; y < tilesetColumns; y++)
             {
-                for(int x = 0; x < tilesetColumns; x++)
+                for(int x = 0; x < tilesetRows; x++)
                 {
-                    int index = y * tilesetColumns + x;
+                    int index = y * tilesetRows;
                     tiles[index] = new Rectangle(
                         x * tileWidth,
                         y * tileHeight,

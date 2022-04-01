@@ -60,7 +60,7 @@ namespace ChickenFarm
             eggCollected = Content.Load<SoundEffect>("EggPickup");
             collision = Content.Load<SoundEffect>("Collision");
             backgroudMusic = Content.Load<Song>("BackgroundCountry");
-            tilemap.LoadContent(Content);
+            //tilemap.LoadContent(Content);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(backgroudMusic);
         }

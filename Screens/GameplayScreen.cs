@@ -62,8 +62,7 @@ namespace ChickenFarm
             backgroundTexture = _content.Load<Texture2D>("Plains");
             eggCollected = _content.Load<SoundEffect>("EggPickup");
             collision = _content.Load<SoundEffect>("Collision");
-            
-
+            tilemap = new Tilemap("map.txt");
 
             System.Random randPosition = new System.Random();
             // TODO: Add your initialization logic here
@@ -103,6 +102,7 @@ namespace ChickenFarm
                 egg.LoadContent(_content);
             }
             goofySnake.LoadContent(_content);
+            tilemap.LoadContent(_content);
 
             // A real game would probably have more content than this sample, so
             // it would take longer to load. We simulate that by delaying for a
@@ -238,6 +238,7 @@ namespace ChickenFarm
             spriteBatch.Begin(transformMatrix: shakeTransform);
 
             spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
+            
             chicken.Draw(gameTime, spriteBatch);
             goofySnake.Draw(gameTime, spriteBatch);
             foreach (var snake in snakes)
@@ -254,7 +255,7 @@ namespace ChickenFarm
 
             spriteBatch.End();
 
-            spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(23, 23, 0));
+            spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(65, 415, 0));
             tilemap.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
