@@ -17,3 +17,7 @@ Content/BackgroundCountry.mp3 - created by Jason Shaw (https://freemusicarchive.
 Content/BackgroundBlueGrass.mp3 - created by Shake That Little Foot (https://freemusicarchive.org/music/Shake_That_Little_Foot/Shake_That_Little_Foot/West_Fork_Gals_vbrmp3) released under CC-BY-NA-SA-3.0 license
 
 Content/0006.png - created by rubberduck on OpenGameArt.org (https://opengameart.org/content/sparkling-fireball-effect), released under public domain
+
+Content/terrain.png - created by adrix89 on OpenGameArt.org (https://opengameart.org/content/tiled-terrains), released under public domain
+
+Content/smallTerrain.png - adapted from terrain.png, credited above
