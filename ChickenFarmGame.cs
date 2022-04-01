@@ -12,6 +12,7 @@ namespace ChickenFarm
         private SpriteBatch _spriteBatch;
         private ChickenSprite chicken;
         private Texture2D backgroundTexture;
+        private Tilemap tilemap;
         
         private SpriteFont bangers;
 
@@ -59,6 +60,7 @@ namespace ChickenFarm
             eggCollected = Content.Load<SoundEffect>("EggPickup");
             collision = Content.Load<SoundEffect>("Collision");
             backgroudMusic = Content.Load<Song>("BackgroundCountry");
+            tilemap.LoadContent(Content);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(backgroudMusic);
         }

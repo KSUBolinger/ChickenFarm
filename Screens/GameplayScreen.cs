@@ -22,6 +22,7 @@ namespace ChickenFarm
         private SpriteFont bangers;
         private int eggsLeft;
         private Texture2D backgroundTexture;
+        private Tilemap tilemap;
         private SoundEffect eggCollected;
         private SoundEffect collision;
 
@@ -61,6 +62,8 @@ namespace ChickenFarm
             backgroundTexture = _content.Load<Texture2D>("Plains");
             eggCollected = _content.Load<SoundEffect>("EggPickup");
             collision = _content.Load<SoundEffect>("Collision");
+            
+
 
             System.Random randPosition = new System.Random();
             // TODO: Add your initialization logic here
@@ -249,6 +252,10 @@ namespace ChickenFarm
             spriteBatch.DrawString(_gameFont, $"Eggs Left: {eggsLeft} ", new Vector2(15, 35), Color.Black);
             spriteBatch.DrawString(_gameFont, $"Use 'ESC' to exit game", new Vector2(15, 5), Color.Black);
 
+            spriteBatch.End();
+
+            spriteBatch.Begin(transformMatrix: Matrix.CreateTranslation(23, 23, 0));
+            tilemap.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
 
