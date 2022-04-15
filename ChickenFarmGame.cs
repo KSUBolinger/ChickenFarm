@@ -22,6 +22,8 @@ namespace ChickenFarm
 
         private readonly ScreenManager screenManager;
 
+        Diamond diamond;
+
         public ChickenFarmGame()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -61,6 +63,7 @@ namespace ChickenFarm
             collision = Content.Load<SoundEffect>("Collision");
             backgroudMusic = Content.Load<Song>("BackgroundCountry");
             //tilemap.LoadContent(Content);
+            diamond = new Diamond(this);
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(backgroudMusic);
         }

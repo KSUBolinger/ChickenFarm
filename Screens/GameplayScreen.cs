@@ -25,6 +25,7 @@ namespace ChickenFarm
         private Tilemap tilemap;
         private SoundEffect eggCollected;
         private SoundEffect collision;
+        Diamond diamond;
 
         private bool _screenShake;
         private float _shakeLength;
@@ -75,7 +76,7 @@ namespace ChickenFarm
                 new SnakeSprite((new Vector2(350, 200)), SnakeDirection.Left)
             };
             goofySnake = new GoofySnake((new Vector2(300, 400)), SnakeDirection.Left);
-
+            diamond = new Diamond(ScreenManager.Game);
 
             Vector2 eggPosition;
             eggs = new EggSprite[4];
@@ -103,7 +104,6 @@ namespace ChickenFarm
             }
             goofySnake.LoadContent(_content);
             tilemap.LoadContent(_content);
-
             // A real game would probably have more content than this sample, so
             // it would take longer to load. We simulate that by delaying for a
             // while, giving you a chance to admire the beautiful loading screen.
@@ -183,6 +183,8 @@ namespace ChickenFarm
                         eggsLeft++;
                     }
                 }
+
+                diamond.Update(gameTime);
             }
         }
 
@@ -259,7 +261,7 @@ namespace ChickenFarm
             tilemap.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
-
+            diamond.Draw();
 
             base.Draw(gameTime);
 
