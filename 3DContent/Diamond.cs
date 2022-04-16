@@ -128,24 +128,6 @@ namespace ChickenFarm
         
         public void Draw()
         {
-            /*
-            RasterizerState oldState = game.GraphicsDevice.RasterizerState;
-
-            RasterizerState rasterizerState = new RasterizerState();
-            rasterizerState.CullMode = CullMode.None;
-            game.GraphicsDevice.RasterizerState = rasterizerState;
-
-            effect.CurrentTechnique.Passes[0].Apply();
-
-            game.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
-                PrimitiveType.TriangleList,
-                vertices,
-                0,
-                4
-            );
-
-            game.GraphicsDevice.RasterizerState = oldState;
-            */
             effect.CurrentTechnique.Passes[0].Apply();
             game.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>
             (
