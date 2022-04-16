@@ -24,88 +24,70 @@ namespace ChickenFarm
 
         void InitializeVerticies()
         {
+            
             vertices = new VertexPositionColor[24];
-            #region verticies 0-11: x - y face of diamond
-            //vertex 0 left
-            vertices[0].Position = new Vector3(-1, 0, 0);
-            vertices[0].Color = Color.LightGreen;
+            #region top vertix
+            //top verticies
+            vertices[0].Position = new Vector3(0, 1, 0);
+            vertices[0].Color = Color.Green;
 
-            //vertex 1 center
-            vertices[1].Position = new Vector3(0, 0, 0);
-            vertices[1].Color = Color.DarkGreen;
-
-            //vertex 2 bottom
-            vertices[2].Position = new Vector3(0, -1, 0);
-            vertices[2].Color = Color.LightGreen;
-
-            //vertex 3 left
             vertices[3] = vertices[0];
-
-            //vertex 4 center
-            vertices[4] = vertices[1];
-
-            //vertex 5 top
-            vertices[5].Position = new Vector3(0, 1, 0);
-            vertices[5].Color = Color.LightGreen;
-
-            //vertex 6 center
-            vertices[6] = vertices[1];
-
-            //vertex 7 bottom
-            vertices[7] = vertices[2];
-
-            //vertex 8 right
-            vertices[8].Position = new Vector3(1, 0, 0);
-            vertices[8].Color = Color.LightGreen;
-
-            //vertex 9 center
-            vertices[9] = vertices[1];
-
-            //vertex 10 top
-            vertices[10] = vertices[5];
-
-            //vertex 11 right
-            vertices[11] = vertices[8];
+            vertices[6] = vertices[0];
+            vertices[9] = vertices[0];
             #endregion
 
-            #region verticies 12 - 24 z face of diamond
-            //vertex 12 back center
-            vertices[12].Position = new Vector3(0, 0, -1);
-            vertices[12].Color = Color.LightGreen;
+            #region bottom vertex
+            //bottom verticies
+            vertices[12].Position = new Vector3(0, -1, 0);
+            vertices[12].Color = vertices[0].Color;
 
-            //vertex 13 center
-            vertices[13] = vertices[1];
-
-            //vertex 14 bottom 
-            vertices[14] = vertices[2];
-
-            //vertex 15 back center
             vertices[15] = vertices[12];
+            vertices[18] = vertices[12];
+            vertices[21] = vertices[12];
+            #endregion
 
-            //vertex 16 center
-            vertices[16] = vertices[1];
+            #region front face
+            //front verticies
+            vertices[1].Position = new Vector3(-1, 0, 1);
+            vertices[1].Color = Color.LightGreen;
+            vertices[14] = vertices[1];
 
-            //vertex 17 top 
-            vertices[17] = vertices[5];
+            vertices[2].Position = new Vector3(1, 0, 1);
+            vertices[2].Color = vertices[1].Color;
+            vertices[13] = vertices[2];
+            #endregion
 
-            //vertex 18 front center
-            vertices[18].Position = new Vector3(0, 0, 1);
-            vertices[18].Color = Color.LightGreen;
+            #region right face
+            //right verticies 
+            vertices[4].Position = vertices[2].Position;
+            vertices[4].Color = Color.LightGreen;
+            vertices[17] = vertices[4];
 
-            //vertex 19 center
-            vertices[19] = vertices[1];
+            vertices[5].Position = new Vector3(1, 0, -1);
+            vertices[5].Color = vertices[4].Color;
+            vertices[16] = vertices[5];
+            #endregion
 
-            //vertex 20 top 
-            vertices[20] = vertices[5];
+            #region back face
+            //back verticies
+            vertices[7].Position = vertices[5].Position;
+            vertices[7].Color = Color.LightGreen;
+            vertices[20] = vertices[7];
 
-            //vertex 21 front center
-            vertices[21] = vertices[18];
+            vertices[8].Position = new Vector3(-1, 0, -1);
+            vertices[8].Color = vertices[7].Color;
+            vertices[19] = vertices[8];
+            #endregion
 
-            //vertex 22 center
-            vertices[22] = vertices[1];
+            #region left face
+            //left verticies
+            vertices[10].Position = vertices[8].Position;
+            vertices[10].Color = Color.LightGreen;
+            vertices[23] = vertices[10];
 
-            //vertex 23 bottom center
-            vertices[23] = vertices[14];
+            vertices[11].Position = vertices[1].Position;
+            vertices[11].Color = vertices[10].Color;
+            vertices[22] = vertices[11];
             #endregion
         }
 
@@ -118,6 +100,8 @@ namespace ChickenFarm
                 new Vector3(0, 0, 0),
                 Vector3.Up
             );
+
+            
             effect.Projection = Matrix.CreatePerspectiveFieldOfView(
                 MathHelper.PiOver4,
                 game.GraphicsDevice.Viewport.AspectRatio,
@@ -141,6 +125,7 @@ namespace ChickenFarm
         
         public void Draw()
         {
+            /*
             RasterizerState oldState = game.GraphicsDevice.RasterizerState;
 
             RasterizerState rasterizerState = new RasterizerState();
@@ -153,10 +138,19 @@ namespace ChickenFarm
                 PrimitiveType.TriangleList,
                 vertices,
                 0,
-                8
+                4
             );
 
             game.GraphicsDevice.RasterizerState = oldState;
+            */
+            effect.CurrentTechnique.Passes[0].Apply();
+            game.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>
+            (
+                PrimitiveType.TriangleList,
+                vertices,
+                0,
+                8
+            );
         }
     }
 }

@@ -64,8 +64,8 @@ namespace ChickenFarm
             backgroudMusic = Content.Load<Song>("BackgroundCountry");
             //tilemap.LoadContent(Content);
             diamond = new Diamond(this);
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(backgroudMusic);
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(backgroudMusic);
         }
 
         protected override void Update(GameTime gameTime)
