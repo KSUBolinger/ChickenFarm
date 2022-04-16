@@ -24,7 +24,7 @@ namespace ChickenFarm
 
         void InitializeVerticies()
         {
-            vertices = new VertexPositionColor[15];
+            vertices = new VertexPositionColor[24];
             #region verticies 0-11: x - y face of diamond
             //vertex 0 left
             vertices[0].Position = new Vector3(-1, 0, 0);
@@ -74,13 +74,38 @@ namespace ChickenFarm
             vertices[12].Color = Color.LightGreen;
 
             //vertex 13 center
-            vertices[13].Position = new Vector3(0, 0, 0);
-            vertices[13].Color = Color.DarkGreen;
+            vertices[13] = vertices[1];
 
-            //vertex 14 back bottom
-            vertices[14].Position = new Vector3(0, -1, 0);
-            vertices[14].Color = Color.LightGreen;
+            //vertex 14 bottom 
+            vertices[14] = vertices[2];
 
+            //vertex 15 back center
+            vertices[15] = vertices[12];
+
+            //vertex 16 center
+            vertices[16] = vertices[1];
+
+            //vertex 17 top 
+            vertices[17] = vertices[5];
+
+            //vertex 18 front center
+            vertices[18].Position = new Vector3(0, 0, 1);
+            vertices[18].Color = Color.LightGreen;
+
+            //vertex 19 center
+            vertices[19] = vertices[1];
+
+            //vertex 20 top 
+            vertices[20] = vertices[5];
+
+            //vertex 21 front center
+            vertices[21] = vertices[18];
+
+            //vertex 22 center
+            vertices[22] = vertices[1];
+
+            //vertex 23 bottom center
+            vertices[23] = vertices[14];
             #endregion
         }
 
@@ -124,7 +149,7 @@ namespace ChickenFarm
                 PrimitiveType.TriangleList,
                 vertices,
                 0,
-                5
+                8
             );
 
             game.GraphicsDevice.RasterizerState = oldState;
