@@ -26,10 +26,22 @@ namespace ChickenFarm
         {
             
             vertices = new VertexPositionColor[24];
+
+            for(int i=0; i < vertices.Length; i++)
+            {
+                if((i % 3) == 0)
+                {
+                    vertices[i].Color = Color.DarkGreen;
+                }
+                else
+                {
+                    vertices[i].Color = Color.LightGreen;
+                }
+            }
+
             #region top vertix
             //top verticies
             vertices[0].Position = new Vector3(0, 1, 0);
-            vertices[0].Color = Color.Green;
 
             vertices[3] = vertices[0];
             vertices[6] = vertices[0];
@@ -39,7 +51,6 @@ namespace ChickenFarm
             #region bottom vertex
             //bottom verticies
             vertices[12].Position = new Vector3(0, -1, 0);
-            vertices[12].Color = vertices[0].Color;
 
             vertices[15] = vertices[12];
             vertices[18] = vertices[12];
@@ -49,44 +60,36 @@ namespace ChickenFarm
             #region front face
             //front verticies
             vertices[1].Position = new Vector3(-1, 0, 1);
-            vertices[1].Color = Color.LightGreen;
             vertices[14] = vertices[1];
 
             vertices[2].Position = new Vector3(1, 0, 1);
-            vertices[2].Color = vertices[1].Color;
             vertices[13] = vertices[2];
             #endregion
 
             #region right face
             //right verticies 
             vertices[4].Position = vertices[2].Position;
-            vertices[4].Color = Color.LightGreen;
             vertices[17] = vertices[4];
 
             vertices[5].Position = new Vector3(1, 0, -1);
-            vertices[5].Color = vertices[4].Color;
             vertices[16] = vertices[5];
             #endregion
 
             #region back face
             //back verticies
             vertices[7].Position = vertices[5].Position;
-            vertices[7].Color = Color.LightGreen;
             vertices[20] = vertices[7];
 
             vertices[8].Position = new Vector3(-1, 0, -1);
-            vertices[8].Color = vertices[7].Color;
             vertices[19] = vertices[8];
             #endregion
 
             #region left face
             //left verticies
             vertices[10].Position = vertices[8].Position;
-            vertices[10].Color = Color.LightGreen;
             vertices[23] = vertices[10];
 
             vertices[11].Position = vertices[1].Position;
-            vertices[11].Color = vertices[10].Color;
             vertices[22] = vertices[11];
             #endregion
         }
