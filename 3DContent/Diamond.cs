@@ -131,7 +131,11 @@ namespace ChickenFarm
         public void Update(GameTime gameTime)
         {
             float angle = (float)gameTime.TotalGameTime.TotalSeconds;
-            effect.World = Matrix.CreateRotationY(angle);
+            effect.View = Matrix.CreateRotationY(angle) * Matrix.CreateLookAt(
+                new Vector3(0,0,-10),
+                Vector3.Zero,
+                Vector3.Up
+            );
         }
 
         
