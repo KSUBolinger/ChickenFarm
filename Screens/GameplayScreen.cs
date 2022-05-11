@@ -17,6 +17,7 @@ namespace ChickenFarm
         private SpriteFont _gameFont;
 
         private SnakeSprite[] snakes;
+        private SnakeSprite2 uNdSnake;
         private GoofySnake goofySnake;
         private ChickenSprite chicken;
         private EggSprite[] eggs;
@@ -78,6 +79,7 @@ namespace ChickenFarm
                 new SnakeSprite((new Vector2(350, 200)), SnakeDirection.Left)
             };
             goofySnake = new GoofySnake((new Vector2(300, 400)), SnakeDirection.Left);
+            uNdSnake = new SnakeSprite2((new Vector2(100, 100)), Snake2Direction.Down);
             diamond = new Diamond(ScreenManager.Game);
 
             Vector2 eggPosition;
@@ -85,17 +87,24 @@ namespace ChickenFarm
             for (int i = 0; i < eggs.Length; i++)
             {
                 eggPosition = new Vector2((float)randPosition.NextDouble() * ScreenManager.GraphicsDevice.Viewport.Width, (float)randPosition.NextDouble() * ScreenManager.GraphicsDevice.Viewport.Height);
-                if (eggPosition.X < 25 && eggPosition.Y < 40)
+                
+                if(eggPosition.X < 25)
                 {
                     eggPosition.X += 40;
+                }
+                if(eggPosition.Y < 40)
+                {
                     eggPosition.Y += 60;
                 }
+
                 eggs[i] = new EggSprite(eggPosition);
             }
+            eggsLeft = eggs.Length;
 
 
 
             chicken.LoadContent(_content);
+            uNdSnake.LoadContent(_content);
             foreach (var snake in snakes)
             {
                 snake.LoadContent(_content);
@@ -145,6 +154,7 @@ namespace ChickenFarm
 
                 chicken.Update(gameTime);
                 goofySnake.Update(gameTime);
+                uNdSnake.Update(gameTime);
                 foreach (var snake in snakes)
                 {
                     snake.Update(gameTime);
@@ -178,12 +188,15 @@ namespace ChickenFarm
 
                 if (eggsLeft == 0)
                 {
+                    LoadingScreen.Load(ScreenManager, true, ControllingPlayer, new GameplayScreen2());
+                    
+                    /*
                     chicken.Reset();
                     foreach (var egg in eggs)
                     {
                         egg.Collected = false;
                         eggsLeft++;
-                    }
+                    }*/
                 }
 
                 diamond.Update(gameTime);
@@ -245,6 +258,7 @@ namespace ChickenFarm
             
             chicken.Draw(gameTime, spriteBatch);
             goofySnake.Draw(gameTime, spriteBatch);
+            uNdSnake.Draw(gameTime, spriteBatch);
             foreach (var snake in snakes)
             {
                 snake.Draw(gameTime, spriteBatch);
@@ -263,7 +277,7 @@ namespace ChickenFarm
             tilemap.Draw(gameTime, spriteBatch);
             spriteBatch.End();
 
-            diamond.Draw();
+            //diamond.Draw();
 
             base.Draw(gameTime);
 
