@@ -31,6 +31,7 @@ namespace ChickenFarm
         private double animationTimer;
         private short animationFrame;
 
+
         public BoundingRectangle Bounds => bounds;
 
         /// <summary>
@@ -83,6 +84,7 @@ namespace ChickenFarm
                 chickenDirection = ChickenDirection.Right;
             }
 
+            
             #endregion
 
             //updating of bounds based on the chicken sprites current position

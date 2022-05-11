@@ -59,10 +59,12 @@ namespace ChickenFarm
             bangers = Content.Load<SpriteFont>("bangers");
             eggCollected = Content.Load<SoundEffect>("EggPickup");
             collision = Content.Load<SoundEffect>("Collision");
+
+            /*
             backgroudMusic = Content.Load<Song>("BackgroundCountry");
             //tilemap.LoadContent(Content);
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(backgroudMusic);
+            MediaPlayer.Play(backgroudMusic);*/
         }
 
         protected override void Update(GameTime gameTime)

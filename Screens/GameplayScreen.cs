@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 
+
 namespace ChickenFarm
 {
     public class GameplayScreen : GameScreen
@@ -25,6 +26,7 @@ namespace ChickenFarm
         private Tilemap tilemap;
         private SoundEffect eggCollected;
         private SoundEffect collision;
+
 
         private bool _screenShake;
         private float _shakeLength;
