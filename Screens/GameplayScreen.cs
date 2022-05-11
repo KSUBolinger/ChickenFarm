@@ -17,7 +17,7 @@ namespace ChickenFarm
         private SpriteFont _gameFont;
 
         private SnakeSprite[] snakes;
-        private SnakeSprite2 uNdSnake;
+        //private SnakeSprite2 uNdSnake;
         private GoofySnake goofySnake;
         private ChickenSprite chicken;
         private EggSprite[] eggs;
@@ -79,7 +79,7 @@ namespace ChickenFarm
                 new SnakeSprite((new Vector2(350, 200)), SnakeDirection.Left)
             };
             goofySnake = new GoofySnake((new Vector2(300, 400)), SnakeDirection.Left);
-            uNdSnake = new SnakeSprite2((new Vector2(100, 100)), Snake2Direction.Down);
+            //uNdSnake = new SnakeSprite2((new Vector2(100, 100)), Snake2Direction.Down);
             diamond = new Diamond(ScreenManager.Game);
 
             Vector2 eggPosition;
@@ -104,7 +104,7 @@ namespace ChickenFarm
 
 
             chicken.LoadContent(_content);
-            uNdSnake.LoadContent(_content);
+            //uNdSnake.LoadContent(_content);
             foreach (var snake in snakes)
             {
                 snake.LoadContent(_content);
@@ -154,7 +154,7 @@ namespace ChickenFarm
 
                 chicken.Update(gameTime);
                 goofySnake.Update(gameTime);
-                uNdSnake.Update(gameTime);
+                //uNdSnake.Update(gameTime);
                 foreach (var snake in snakes)
                 {
                     snake.Update(gameTime);
@@ -188,7 +188,7 @@ namespace ChickenFarm
 
                 if (eggsLeft == 0)
                 {
-                    LoadingScreen.Load(ScreenManager, true, ControllingPlayer, new GameplayScreen2());
+                    LoadingScreen.Load(ScreenManager, true, ControllingPlayer, new BackgroundScreen(), new GameplayScreen2());
                     
                     /*
                     chicken.Reset();
@@ -258,7 +258,7 @@ namespace ChickenFarm
             
             chicken.Draw(gameTime, spriteBatch);
             goofySnake.Draw(gameTime, spriteBatch);
-            uNdSnake.Draw(gameTime, spriteBatch);
+            //uNdSnake.Draw(gameTime, spriteBatch);
             foreach (var snake in snakes)
             {
                 snake.Draw(gameTime, spriteBatch);

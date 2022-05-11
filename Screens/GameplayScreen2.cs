@@ -57,6 +57,7 @@ namespace ChickenFarm
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
 
+            #region intialize values 
             _sucessCapture = new SuccessfulCaptureParticle(ScreenManager.Game, 20);
             ScreenManager.Game.Components.Add(_sucessCapture);
 
@@ -70,7 +71,52 @@ namespace ChickenFarm
             System.Random randPosition = new System.Random();
 
             chicken = new ChickenSprite();
+
+            snakes = new SnakeSprite[]
+            {
+                new SnakeSprite((new Vector2(400, 375)), SnakeDirection.Right),
+                new SnakeSprite((new Vector2(325, 100)), SnakeDirection.Left)
+            };
+            snakes2 = new SnakeSprite2[]
+            {
+                new SnakeSprite2((new Vector2(200, 300)), Snake2Direction.Up),
+                new SnakeSprite2((new Vector2(350, 200)), Snake2Direction.Down)
+            };
+
+            Vector2 eggPosition;
+            eggs = new EggSprite[5];
+            for(int i = 0; i < eggs.Length; i++)
+            {
+                eggPosition = new Vector2((float)randPosition.NextDouble() * ScreenManager.GraphicsDevice.Viewport.Width, (float)randPosition.NextDouble() * ScreenManager.GraphicsDevice.Viewport.Height);
+
+                if(eggPosition.X < 25)
+                {
+                    eggPosition.X += 40;
+                }
+                if(eggPosition.Y < 30)
+                {
+                    eggPosition.Y += 60;
+                }
+                eggs[i] = new EggSprite(eggPosition);
+            }
+            eggsLeft = eggs.Length;
+            #endregion
+
+            #region Load Content
             chicken.LoadContent(_content);
+            foreach(var snake in snakes)
+            {
+                snake.LoadContent(_content);
+            }
+            foreach(var snake2 in snakes2)
+            {
+                snake2.LoadContent(_content);
+            }
+            foreach(var egg in eggs)
+            {
+                egg.LoadContent(_content);
+            }
+            #endregion
 
             Thread.Sleep(1000);
             ScreenManager.Game.ResetElapsedTime();
@@ -101,7 +147,65 @@ namespace ChickenFarm
 
             if (IsActive)
             {
+                #region Update Sprites
                 chicken.Update(gameTime);
+
+                foreach(var snake in snakes)
+                {
+                    snake.Update(gameTime);
+                    if (chicken.Bounds.CollidesWith(snake.Bounds))
+                    {
+                        _screenShake = true;
+                        _shakeLength = 0;
+
+                        chicken.Reset();
+                        foreach(var egg in eggs)
+                        {
+                            if (egg.Collected)
+                            {
+                                egg.Collected = false;
+                                eggsLeft++;
+                            }
+                        }
+                    }
+                }
+
+                foreach(var snake in snakes2)
+                {
+                    snake.Update(gameTime);
+                    if (chicken.Bounds.CollidesWith(snake.Bounds))
+                    {
+                        _screenShake = true;
+                        _shakeLength = 0;
+
+                        chicken.Reset();
+                        foreach (var egg in eggs)
+                        {
+                            if (egg.Collected)
+                            {
+                                egg.Collected = false;
+                                eggsLeft++;
+                            }
+                        }
+                    }
+                }
+                
+                foreach(var egg in eggs)
+                {
+                    if(!egg.Collected && egg.Bounds.CollidesWith(chicken.Bounds))
+                    {
+                        egg.Collected = true;
+                        eggsLeft--;
+                        _sucessCapture.ShowSucessfulCapture(egg.Bounds.Center);
+                        eggCollected.Play();
+                    }
+                }
+#endregion
+
+                if (eggsLeft == 0)
+                {
+                    eggsLeft = 4; // temp till next level
+                }
             }
         }
 
@@ -147,6 +251,21 @@ namespace ChickenFarm
             spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), Color.White);
 
             chicken.Draw(gameTime, spriteBatch);
+
+            foreach(var snake in snakes)
+            {
+                snake.Draw(gameTime, spriteBatch);
+            }
+
+            foreach(var snake in snakes2)
+            {
+                snake.Draw(gameTime, spriteBatch);
+            }
+
+            foreach(var egg in eggs)
+            {
+                egg.Draw(gameTime, spriteBatch);
+            }
 
 
             spriteBatch.DrawString(_gameFont, $"Eggs Left: {eggsLeft} ", new Vector2(15, 35), Color.Black);

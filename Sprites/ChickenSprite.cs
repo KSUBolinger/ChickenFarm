@@ -26,6 +26,7 @@ namespace ChickenFarm
         private ChickenDirection chickenDirection;
         private InputManager inputManager = new InputManager();
         private BoundingRectangle bounds = new BoundingRectangle(new Vector2(200 - 16, 200 - 16), 32, 32);
+        
         public Color color;
 
         private double animationTimer;
