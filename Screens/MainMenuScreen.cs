@@ -29,7 +29,7 @@ namespace ChickenFarm
         private void PlayGameMenuEntrySelected(object sender, PlayerIndexEventArgs e)
         {
             //LoadingScreen.Load(ScreenManager, true, e.PlayerIndex, new BackgroundScreen(), new GameplayScreen());
-            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex, new BackgroundScreen(), new GameplayScreen3()); // testing line
+            LoadingScreen.Load(ScreenManager, true, e.PlayerIndex, new BackgroundScreen(), new GameplayScreen()); // testing line
         }
 
         //private void OptionsMenuEntrySelected(object sender, PlayerIndexEventArgs e)

@@ -96,6 +96,14 @@ namespace ChickenFarm
                 {
                     eggPosition.Y += 60;
                 }
+                if ((eggPosition.X + 50) >= ScreenManager.GraphicsDevice.Viewport.Width)
+                {
+                    eggPosition.X -= 100;
+                }
+                if ((eggPosition.Y + 50) >= ScreenManager.GraphicsDevice.Viewport.Height)
+                {
+                    eggPosition.Y -= 100;
+                }
 
                 eggs[i] = new EggSprite(eggPosition);
             }
