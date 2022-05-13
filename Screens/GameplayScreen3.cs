@@ -10,13 +10,15 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace ChickenFarm
 {
-    public class GameplayScreen2 : GameScreen
+    public class GameplayScreen3 : GameScreen
     {
         private ContentManager _content;
         private SpriteFont _gameFont;
 
-        private SnakeSprite[] snakes;
-        private SnakeSprite2[] snakes2;
+        private SnakeSprite3[] squareSnakes;
+
+        private SnakeSprite snake;
+        private SnakeSprite2 snake2;
         private ChickenSprite chicken;
         private EggSprite[] eggs;
         private SpriteFont bangers;
@@ -28,17 +30,12 @@ namespace ChickenFarm
         private bool _screenShake;
         private float _shakeLength;
 
-        public Vector2 Position { get; set; }
-
-        public Vector2 Velocity { get; set; }
-
-
-        SuccessfulCaptureParticle _sucessCapture;
-
         private float _pauseAlpha;
         private readonly InputAction _pauseAction;
 
-        public GameplayScreen2()
+        SuccessfulCaptureParticle _sucessCapture;
+
+        public GameplayScreen3()
         {
             TransitionOnTime = TimeSpan.FromSeconds(1.5);
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
@@ -57,31 +54,27 @@ namespace ChickenFarm
                 _content = new ContentManager(ScreenManager.Game.Services, "Content");
             }
 
-            #region intialize values 
+            #region intialize values
             _sucessCapture = new SuccessfulCaptureParticle(ScreenManager.Game, 20);
             ScreenManager.Game.Components.Add(_sucessCapture);
 
             _gameFont = _content.Load<SpriteFont>("bangers");
-
             backgroundTexture = _content.Load<Texture2D>("Plains");
             eggCollected = _content.Load<SoundEffect>("EggPickup");
             collision = _content.Load<SoundEffect>("Collision");
-
 
             System.Random randPosition = new System.Random();
 
             chicken = new ChickenSprite();
 
-            snakes = new SnakeSprite[]
+            squareSnakes = new SnakeSprite3[]
             {
-                new SnakeSprite((new Vector2(400, 375)), SnakeDirection.Right),
-                new SnakeSprite((new Vector2(375, 90)), SnakeDirection.Left)
+                new SnakeSprite3((new Vector2(250, 350)), SnakeDirection_3.Left),
+                new SnakeSprite3((new Vector2(450, 150)), SnakeDirection_3.Down)
             };
-            snakes2 = new SnakeSprite2[]
-            {
-                new SnakeSprite2((new Vector2(250, 325)), Snake2Direction.Up),
-                new SnakeSprite2((new Vector2(385, 200)), Snake2Direction.Down)
-            };
+
+            snake = new SnakeSprite((new Vector2(375, 290)), SnakeDirection.Left);
+            snake2 = new SnakeSprite2((new Vector2(175, 350)), Snake2Direction.Up);
 
             Vector2 eggPosition;
             eggs = new EggSprite[5];
@@ -89,15 +82,15 @@ namespace ChickenFarm
             {
                 eggPosition = new Vector2((float)randPosition.NextDouble() * ScreenManager.GraphicsDevice.Viewport.Width, (float)randPosition.NextDouble() * ScreenManager.GraphicsDevice.Viewport.Height);
 
-                if(eggPosition.X < 25)
+                if (eggPosition.X < 25)
                 {
                     eggPosition.X += 40;
                 }
-                if(eggPosition.Y < 30)
+                if (eggPosition.Y < 30)
                 {
                     eggPosition.Y += 60;
                 }
-                
+
                 eggs[i] = new EggSprite(eggPosition);
             }
             eggsLeft = eggs.Length;
@@ -105,14 +98,14 @@ namespace ChickenFarm
 
             #region Load Content
             chicken.LoadContent(_content);
-            foreach(var snake in snakes)
+            foreach(var snake in squareSnakes)
             {
                 snake.LoadContent(_content);
             }
-            foreach(var snake2 in snakes2)
-            {
-                snake2.LoadContent(_content);
-            }
+
+            snake.LoadContent(_content);
+            snake2.LoadContent(_content);
+            
             foreach(var egg in eggs)
             {
                 egg.LoadContent(_content);
@@ -130,6 +123,7 @@ namespace ChickenFarm
 
         public override void Unload()
         {
+            
             _content.Unload();
         }
 
@@ -148,30 +142,10 @@ namespace ChickenFarm
 
             if (IsActive)
             {
-                #region Update Sprites
+                #region update sprites 
                 chicken.Update(gameTime);
 
-                foreach(var snake in snakes)
-                {
-                    snake.Update(gameTime);
-                    if (chicken.Bounds.CollidesWith(snake.Bounds))
-                    {
-                        _screenShake = true;
-                        _shakeLength = 0;
-
-                        chicken.Reset();
-                        foreach(var egg in eggs)
-                        {
-                            if (egg.Collected)
-                            {
-                                egg.Collected = false;
-                                eggsLeft++;
-                            }
-                        }
-                    }
-                }
-
-                foreach(var snake in snakes2)
+                foreach(var snake in squareSnakes)
                 {
                     snake.Update(gameTime);
                     if (chicken.Bounds.CollidesWith(snake.Bounds))
@@ -190,10 +164,44 @@ namespace ChickenFarm
                         }
                     }
                 }
-                
-                foreach(var egg in eggs)
+
+                snake.Update(gameTime);
+                if (chicken.Bounds.CollidesWith(snake.Bounds))
                 {
-                    if(!egg.Collected && egg.Bounds.CollidesWith(chicken.Bounds))
+                    _screenShake = true;
+                    _shakeLength = 0;
+
+                    chicken.Reset();
+                    foreach (var egg in eggs)
+                    {
+                        if (egg.Collected)
+                        {
+                            egg.Collected = false;
+                            eggsLeft++;
+                        }
+                    }
+                }
+
+                snake2.Update(gameTime);
+                if (chicken.Bounds.CollidesWith(snake.Bounds))
+                {
+                    _screenShake = true;
+                    _shakeLength = 0;
+
+                    chicken.Reset();
+                    foreach(var egg in eggs)
+                    {
+                        if (egg.Collected)
+                        {
+                            egg.Collected = false;
+                            eggsLeft++;
+                        }
+                    }
+                }
+
+                foreach (var egg in eggs)
+                {
+                    if (!egg.Collected && egg.Bounds.CollidesWith(chicken.Bounds))
                     {
                         egg.Collected = true;
                         eggsLeft--;
@@ -201,12 +209,13 @@ namespace ChickenFarm
                         eggCollected.Play();
                     }
                 }
-#endregion
 
-                if (eggsLeft == 0)
+                #endregion
+
+                if(eggsLeft == 0)
                 {
-                    //eggsLeft = 4; // temp till next level
-                    LoadingScreen.Load(ScreenManager, true, ControllingPlayer, new BackgroundScreen(), new GameplayScreen3());
+                    //eggsLeft = 4;
+                    LoadingScreen.Load(ScreenManager, true, ControllingPlayer, new BackgroundScreen(), new GameplayScreen4());
                 }
             }
         }
@@ -231,6 +240,7 @@ namespace ChickenFarm
             }
         }
 
+
         public override void Draw(GameTime gameTime)
         {
             ScreenManager.GraphicsDevice.Clear(ClearOptions.Target, Color.CornflowerBlue, 0, 0);
@@ -254,23 +264,20 @@ namespace ChickenFarm
 
             chicken.Draw(gameTime, spriteBatch);
 
-            foreach(var snake in snakes)
+            foreach(var snake in squareSnakes)
             {
                 snake.Draw(gameTime, spriteBatch);
             }
 
-            foreach(var snake in snakes2)
-            {
-                snake.Draw(gameTime, spriteBatch);
-            }
+            snake.Draw(gameTime, spriteBatch);
+            snake2.Draw(gameTime, spriteBatch);
 
             foreach(var egg in eggs)
             {
                 egg.Draw(gameTime, spriteBatch);
             }
 
-
-            spriteBatch.DrawString(_gameFont, $"Eggs Left: {eggsLeft} ", new Vector2(15, 35), Color.Black);
+            spriteBatch.DrawString(_gameFont, $"Eggs Left: {eggsLeft}", new Vector2(15, 35), Color.Black);
             spriteBatch.End();
 
             base.Draw(gameTime);
